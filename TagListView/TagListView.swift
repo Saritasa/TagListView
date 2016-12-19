@@ -188,6 +188,8 @@ open class TagListView: UIView {
             rearrangeViews()
         }
     }
+
+    open var bottomMargin: CGFloat = 0
     
     @IBOutlet open weak var delegate: TagListViewDelegate?
     
@@ -279,6 +281,7 @@ open class TagListView: UIView {
         var height = CGFloat(rows) * (tagViewHeight + marginY)
         if rows > 0 {
             height -= marginY
+            height += self.bottomMargin
         }
         return CGSize(width: frame.width, height: height)
     }
