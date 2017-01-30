@@ -11,6 +11,27 @@ import UIKit
 @IBDesignable
 open class TagView: UIButton {
 
+    /// This property doesn't change background color of the view.
+    /// Use `specialBackgroundColor` instead.
+    override open var backgroundColor: UIColor? {
+        set {
+
+        }
+        get {
+            return super.backgroundColor
+        }
+    }
+
+    /// Background color of this view.
+    var specialBackgroundColor: UIColor? {
+        set {
+            super.backgroundColor = newValue
+        }
+        get {
+            return super.backgroundColor
+        }
+    }
+
     @IBInspectable open var cornerRadius: CGFloat = 0 {
         didSet {
             layer.cornerRadius = cornerRadius
@@ -87,16 +108,16 @@ open class TagView: UIButton {
             if let highlightedBackgroundColor = highlightedBackgroundColor {
                 // For highlighted, if it's nil, we should not fallback to backgroundColor.
                 // Instead, we keep the current color.
-                backgroundColor = highlightedBackgroundColor
+                specialBackgroundColor = highlightedBackgroundColor
             }
         }
         else if isSelected {
-            backgroundColor = selectedBackgroundColor ?? tagBackgroundColor
+            specialBackgroundColor = selectedBackgroundColor ?? tagBackgroundColor
             layer.borderColor = selectedBorderColor?.cgColor ?? borderColor?.cgColor
             setTitleColor(selectedTextColor, for: UIControlState())
         }
         else {
-            backgroundColor = tagBackgroundColor
+            specialBackgroundColor = tagBackgroundColor
             layer.borderColor = borderColor?.cgColor
             setTitleColor(textColor, for: UIControlState())
         }
