@@ -199,15 +199,15 @@ open class TagView: UIButton {
     // MARK: - layout
 
     override open var intrinsicContentSize: CGSize {
-        var size = titleLabel?.text?.size(attributes: [NSFontAttributeName: textFont]) ?? CGSize.zero
-        size.height = textFont.pointSize + paddingY * 2
+        var size = titleLabel?.intrinsicContentSize ?? CGSize.zero
+        size.height += paddingY * 2
         size.width += paddingX * 2
         if enableRemoveButton {
             size.width += removeButtonIconSize + paddingX
         }
         return size
     }
-    
+
     private func updateRightInsets() {
         if enableRemoveButton {
             titleEdgeInsets.right = paddingX  + removeButtonIconSize + paddingX
