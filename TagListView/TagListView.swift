@@ -202,6 +202,8 @@ open class TagListView: UIView {
             invalidateIntrinsicContentSize()
         }
     }
+
+    private var layoutWidth: CGFloat = 0.0
     
     // MARK: - Interface Builder
     
@@ -215,8 +217,11 @@ open class TagListView: UIView {
     
     open override func layoutSubviews() {
         super.layoutSubviews()
-        
-        rearrangeViews()
+
+        // This prevents extra layout if the width of the view hasn't changed from previous layout.
+        if layoutWidth != bounds.size.width {
+            rearrangeViews()
+        }
     }
     
     private func rearrangeViews() {
@@ -277,7 +282,7 @@ open class TagListView: UIView {
         }
         rows = currentRow
         
-        invalidateIntrinsicContentSize()
+        layoutWidth = bounds.size.width
     }
     
     // MARK: - Manage tags
