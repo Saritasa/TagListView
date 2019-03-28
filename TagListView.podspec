@@ -12,4 +12,5 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/ElaWorkshop/TagListView.git", :tag => s.version }
   s.source_files = "TagListView/*.swift"
   s.requires_arc = true
+  s.swift_version = "4.2"
 end
