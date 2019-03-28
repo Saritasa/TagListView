@@ -114,12 +114,12 @@ open class TagView: UIButton {
         else if isSelected {
             specialBackgroundColor = selectedBackgroundColor ?? tagBackgroundColor
             layer.borderColor = selectedBorderColor?.cgColor ?? borderColor?.cgColor
-            setTitleColor(selectedTextColor, for: UIControlState())
+            setTitleColor(selectedTextColor, for: .normal)
         }
         else {
             specialBackgroundColor = tagBackgroundColor
             layer.borderColor = borderColor?.cgColor
-            setTitleColor(textColor, for: UIControlState())
+            setTitleColor(textColor, for: .normal)
         }
     }
     
@@ -178,7 +178,7 @@ open class TagView: UIButton {
     
     public init(title: String) {
         super.init(frame: CGRect.zero)
-        setTitle(title, for: UIControlState())
+        setTitle(title, for: .normal)
         
         setupView()
     }
@@ -188,11 +188,11 @@ open class TagView: UIButton {
         addSubview(removeButton)
         removeButton.tagView = self
         
-        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.longPress))
-        self.addGestureRecognizer(longPress)
+        let recognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
+        self.addGestureRecognizer(recognizer)
     }
     
-    func longPress() {
+    @objc func longPress() {
         onLongPress?(self)
     }
     
